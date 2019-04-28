@@ -12,13 +12,13 @@ def combine(inp,out):
 		vis=np.concatenate((img1,img2),axis=1)
 		cv2.imwrite(im2,vis)
 	oimg="captchaout/"+str(out)+".png"
-	cv2.imwrite(oimg,vis)
+	#cv2.imwrite(oimg,vis)
 
 # 0. Read the image
-	image  = misc.imread(oimg,mode="L")
+	#image  = misc.imread(oimg,mode="L")
 
 # 1. Add noises to the image
-	noisy1 = image + 3 * image.std() * np.random.random(image.shape)
+	noisy1 = vis + 3 * vis.std() * np.random.random(vis.shape)
 	cv2.imwrite(oimg,noisy1)
 	print oimg
 
