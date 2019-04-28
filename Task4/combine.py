@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import random
+from scipy import misc
 def combine(inp,out):
 	i=1
 	for i in range(1,inp-1):
@@ -11,11 +12,14 @@ def combine(inp,out):
 		vis=np.concatenate((img1,img2),axis=1)
 		cv2.imwrite(im2,vis)
 	oimg="captchaout/"+str(out)+".png"
-	for i in range(100):
-		a= random.randint(1, 400)
-		b= random.randint(1, 100)
-		cv2.circle(vis,(a,b), 2, (0,0,254), -1)
-		cv2.imwrite(oimg,vis)
+	cv2.imwrite(oimg,vis)
+
+# 0. Read the image
+	image  = misc.imread(oimg,mode="L")
+
+# 1. Add noises to the image
+	noisy1 = image + 3 * image.std() * np.random.random(image.shape)
+	cv2.imwrite(oimg,noisy1)
 	print oimg
 
 
